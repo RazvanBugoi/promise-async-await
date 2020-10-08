@@ -1,24 +1,22 @@
-function parseData() {
-    fetch("https://api.github.com/users/razvanbugoi")
-        .then((response) => {
-            return response.json();
+function loadJson(url) {
+    return fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                return response.json();
+            } else {
+                throw new Error(response.status);
+            }
         })
-        .then((myJson) => {
-            console.log(myJson.login);
-        })
-        .then((myJson) => {
-            console.log(myJson);
-        })
-        //     .then((myJson)=> {
-        //     console.log(myJson.type);
-        // })
 }
 
 
-async function gitAPI() {
-    let response = await fetch("https://api.github.com/users/razvanbugoi");
-    let json = await response.json();
+async function loadJson(url) {
+    let response = await fetch(url);
+    let user = await response.json();
 
-    console.log(json);
-
+    if (response.status == 200) {
+        return user;
+    } else {
+        throw new Error(response.status)
+    }
 }
